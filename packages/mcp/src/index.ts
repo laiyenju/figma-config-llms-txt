@@ -14,9 +14,14 @@ import {
 const DATA_CACHE_KEY = 'data.json';
 const DEFAULT_EVENT = 'san-francisco';
 
-let scrapePromise: Promise<ParsedData> | null = null;
+interface LoadResult {
+  data: ParsedData;
+  freshlyScraped: boolean;
+}
 
-async function loadData(): Promise<ParsedData> {
+let scrapePromise: Promise<LoadResult> | null = null;
+
+async function loadData(): Promise<LoadResult> {
   // Fast path: a scrape is already running — share it instead of starting a second one
   if (scrapePromise) return scrapePromise;
 
@@ -25,7 +30,7 @@ async function loadData(): Promise<ParsedData> {
     const raw = await getCached(DATA_CACHE_KEY);
     if (raw) {
       try {
-        return JSON.parse(raw) as ParsedData;
+        return { data: JSON.parse(raw) as ParsedData, freshlyScraped: false };
       } catch {
         // Corrupted cache — fall through to re-scrape
       }
@@ -35,10 +40,12 @@ async function loadData(): Promise<ParsedData> {
   // Re-check after awaits: another call may have started scraping while we waited
   if (scrapePromise) return scrapePromise;
 
+  console.error('[figma-config-mcp] Cache cold or expired — scraping Figma Config 2026 (~90s)…');
   scrapePromise = buildData(DEFAULT_EVENT)
     .then(async data => {
       await setCached(DATA_CACHE_KEY, JSON.stringify(data));
-      return data;
+      console.error('[figma-config-mcp] Scrape complete.');
+      return { data, freshlyScraped: true };
     })
     .finally(() => {
       scrapePromise = null;
@@ -117,7 +124,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
 server.setRequestHandler(CallToolRequestSchema, async request => {
   const { name, arguments: args = {} } = request.params;
 
-  const data = await loadData();
+  const { data, freshlyScraped } = await loadData();
 
   let content: string;
   switch (name) {
@@ -143,7 +150,11 @@ server.setRequestHandler(CallToolRequestSchema, async request => {
       };
   }
 
-  return { content: [{ type: 'text' as const, text: content }] };
+  const notice = freshlyScraped
+    ? '_Note: Figma Config 2026 data was just scraped for the first time (or after a 24-hour refresh). Future tool calls will be instant._\n\n---\n\n'
+    : '';
+
+  return { content: [{ type: 'text' as const, text: notice + content }] };
 });
 
 const transport = new StdioServerTransport();
