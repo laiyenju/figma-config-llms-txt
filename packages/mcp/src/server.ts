@@ -9,7 +9,7 @@ import {
   getEventSummary,
 } from './tools.js';
 
-const TOOLS = [
+export const TOOLS = [
   {
     name: 'get_agenda',
     description: 'Get Figma Config 2026 agenda, filterable by date, tag, and stage',
