@@ -88,8 +88,9 @@ async function run(): Promise<void> {
       }
     }
 
-    // Reconstruct agenda from sessions if dedicated agenda page was empty
-    if (agenda.length === 0 && sessions.length > 0) {
+    // Always rebuild agenda from individual sessions — the agenda page SSR
+    // only renders a small featured subset, not the full schedule.
+    if (sessions.length > 0) {
       const dayMap = new Map<string, Session[]>();
       for (const s of sessions) {
         const list = dayMap.get(s.date) ?? [];
@@ -101,12 +102,23 @@ async function run(): Promise<void> {
         .map(([date, daySessions]) => ({ date, sessions: daySessions }));
     }
 
-    spinner.succeed(`Parsed ${sessions.length} sessions, ${speakers.length} speakers`);
+    // Merge speakers from individual session pages — speakers page SSR only
+    // renders featured speakers. Session pages embed the full speaker roster.
+    const speakerMap = new Map<string, Speaker>();
+    for (const sp of speakers) speakerMap.set(sp.name, sp);
+    for (const s of sessions) {
+      for (const sp of s.speakers) {
+        if (!speakerMap.has(sp.name)) speakerMap.set(sp.name, sp);
+      }
+    }
+    const mergedSpeakers = Array.from(speakerMap.values());
+
+    spinner.succeed(`Parsed ${sessions.length} sessions, ${mergedSpeakers.length} speakers`);
 
     spinner.start('Writing output...');
     const data: ParsedData = {
       sessions,
-      speakers,
+      speakers: mergedSpeakers,
       agenda,
       event: opts.event,
       scrapedAt: new Date().toISOString(),

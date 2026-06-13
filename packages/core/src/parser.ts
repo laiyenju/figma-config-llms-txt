@@ -16,8 +16,11 @@ export function parseSessionPage(html: string, url: string): Session {
   const $ = load(html);
   const main = $('main');
 
-  // Session pages use h2 for the title (no h1 in <main>)
-  const title = main.find('h2').first().text().trim() || $('h2').first().text().trim();
+  // Event pages use h1; session pages use h2 (no h1 in <main> for sessions)
+  const title =
+    main.find('h1').first().text().trim() ||
+    main.find('h2').first().text().trim() ||
+    $('h1').first().text().trim();
 
   // Date is in a <span> with text matching "Jun N" directly
   let date = '';
