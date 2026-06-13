@@ -10,7 +10,7 @@ importers:
 
   packages/cli:
     dependencies:
-      '@figma-config/core':
+      '@yenlai/figma-config-core':
         specifier: workspace:*
         version: link:../core
       commander:
@@ -69,12 +69,12 @@ importers:
 
   packages/mcp:
     dependencies:
-      '@figma-config/core':
-        specifier: workspace:*
-        version: link:../core
       '@modelcontextprotocol/sdk':
         specifier: ^1.0.0
         version: 1.29.0(zod@4.4.3)
+      '@yenlai/figma-config-core':
+        specifier: workspace:*
+        version: link:../core
       fuse.js:
         specifier: ^7.0.0
         version: 7.4.2
