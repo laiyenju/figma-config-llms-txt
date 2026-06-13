@@ -16,6 +16,8 @@ https://figma-config-llms-txt-mcp.vercel.app/mcp
 
 ### Claude Desktop — local
 
+> **Coming soon** — `figma-config-2026-mcp` is pending npm approval. Use the remote URL above in the meantime.
+
 Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 ```json
