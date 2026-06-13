@@ -66,7 +66,7 @@ Tell me about the opening keynote.
 ## Related
 
 - [`figma-config-llms-txt`](https://www.npmjs.com/package/figma-config-llms-txt) — CLI tool to export data as Markdown / llms.txt files
-- [`@figma-config/core`](https://www.npmjs.com/package/@figma-config/core) — Shared scraper and parser library
+- [`@yenlai/figma-config-core`](https://www.npmjs.com/package/@yenlai/figma-config-core) — Shared scraper and parser library
 
 ## License
 

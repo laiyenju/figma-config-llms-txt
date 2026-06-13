@@ -34,7 +34,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@figma-config/core": "workspace:*",
+    "@yenlai/figma-config-core": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.0.0",
     "fuse.js": "^7.0.0"
   },

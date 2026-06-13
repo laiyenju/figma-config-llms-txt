@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js';
-import type { ParsedData, Session, AgendaDay } from '@figma-config/core';
+import type { ParsedData, Session, AgendaDay } from '@yenlai/figma-config-core';
 
 const MAX_RESPONSE_TOKENS = 8000;
 

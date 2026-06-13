@@ -1,5 +1,5 @@
 {
-  "name": "@figma-config/core",
+  "name": "@yenlai/figma-config-core",
   "version": "1.0.0",
   "type": "module",
   "description": "Shared scraper, parser, and formatter for Figma Config 2026 data",

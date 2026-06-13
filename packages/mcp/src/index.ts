@@ -1,6 +1,6 @@
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { getCached, isCacheStale, setCached, buildData } from '@figma-config/core';
-import type { ParsedData } from '@figma-config/core';
+import { getCached, isCacheStale, setCached, buildData } from '@yenlai/figma-config-core';
+import type { ParsedData } from '@yenlai/figma-config-core';
 import { createMcpServer } from './server.js';
 
 const DATA_CACHE_KEY = 'data.json';

@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { createMcpServer } from '../src/server.js';
-import type { ParsedData } from '@figma-config/core';
+import type { ParsedData } from '@yenlai/figma-config-core';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

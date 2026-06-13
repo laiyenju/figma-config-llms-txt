@@ -1,6 +1,6 @@
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
-import type { ParsedData } from '@figma-config/core';
+import type { ParsedData } from '@yenlai/figma-config-core';
 import {
   getAgenda,
   getSession,

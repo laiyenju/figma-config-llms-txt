@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 import ora from 'ora';
 import { mkdir } from 'node:fs/promises';
-import { buildData, writeOutput, setCached } from '@figma-config/core';
+import { buildData, writeOutput, setCached } from '@yenlai/figma-config-core';
 
 const program = new Command();
 
