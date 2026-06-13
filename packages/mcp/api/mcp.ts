@@ -1,7 +1,8 @@
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js';
 import { createMcpServer } from '../src/server.js';
 import type { ParsedData } from '@figma-config/core';
-import rawData from '../data/data.json' with { type: 'json' };
+// @ts-ignore — esbuild handles JSON imports natively; NodeNext requires 'with' but Edge bundler doesn't support it yet
+import rawData from '../data/data.json';
 
 export const config = { runtime: 'edge' };
 
