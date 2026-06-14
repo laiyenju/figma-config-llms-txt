@@ -60,7 +60,7 @@ Google 的講者有誰？
 這個 monorepo 由三個套件組成，分工明確：爬取解析、資料匯出、查詢介面各自獨立，可單獨使用或組合運作。
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[config.figma.com] -->|爬取 + 解析| B["@yenlai/figma-config-core"]
     B --> C[figma-config-llms-txt]
     C -->|輸出 data.json| D[figma-config-2026-mcp]
