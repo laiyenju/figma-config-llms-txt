@@ -61,7 +61,7 @@ Google 的講者有誰？
 
 ```mermaid
 flowchart LR
-    A[config.figma.com] -->|爬取 + 解析| B[@yenlai/figma-config-core]
+    A[config.figma.com] -->|爬取 + 解析| B["@yenlai/figma-config-core"]
     B --> C[figma-config-llms-txt]
     C -->|輸出 data.json| D[figma-config-2026-mcp]
     D -->|5 個查詢工具| E[Claude]
